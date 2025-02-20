@@ -1,0 +1,58 @@
+{
+  "canisters": {
+    "chaincycle_backend": {
+      "main": "src/backend/main.mo",
+      "type": "motoko"
+    },
+    "chaincycle_frontend": {
+      "dependencies": [
+        "chaincycle_backend",
+        "internet_identity"
+      ],
+      "frontend": {
+        "entrypoint": "src/frontend/dist/index.html"
+      },
+      "source": [
+        "src/frontend/dist/"
+      ],
+      "type": "assets"
+    },
+    "gtk_token": {
+      "main": "src/backend/gtk_token/main.mo",
+      "type": "motoko"
+    },
+    "internet_identity": {
+      "type": "custom",
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz",
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "frontend": {}
+    },
+    "marketplace": {
+      "main": "src/backend/marketplace/main.mo",
+      "type": "motoko"
+    },
+    "user_profile": {
+      "main": "src/backend/user_profile/main.mo",
+      "type": "motoko"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

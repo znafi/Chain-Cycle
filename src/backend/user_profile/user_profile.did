@@ -1,0 +1,47 @@
+type Profile = record {
+    id: principal;
+    greenScore: nat;
+    listings: vec nat;
+    bids: vec nat;
+    votedProposals: vec nat;
+    lastActivity: int;
+    balance: nat;
+};
+
+type ProfileUpdate = record {
+    greenScore: opt nat;
+    listings: opt vec nat;
+    bids: opt vec nat;
+    votedProposals: opt vec nat;
+    balance: opt nat;
+};
+
+type Result = variant {
+    ok: Profile;
+    err: text;
+};
+
+type Result_1 = variant {
+    ok: nat;
+    err: text;
+};
+
+type Result_2 = variant {
+    ok: null;
+    err: text;
+};
+
+service : {
+    createProfile: () -> (Result);
+    updateProfile: (ProfileUpdate) -> (Result);
+    getProfile: (principal) -> (opt Profile) query;
+    getAllProfiles: () -> (vec Profile) query;
+    hasProfile: (principal) -> (bool) query;
+    hasVoted: (principal, nat) -> (bool) query;
+    recordVote: (nat) -> (Result_2);
+    updateGreenScore: (principal, nat) -> (Result_2);
+    getBalance: (principal) -> (nat) query;
+    addBalance: (nat) -> (Result_1);
+    subtractBalance: (nat) -> (Result_1);
+    transferBalance: (principal, nat) -> (Result_2);
+}

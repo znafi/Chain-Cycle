@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.dfx/
+dist/
+
+# Environment files
+.env.local
+.env.*.local
+
+# Build files
+*.wasm
+.webpack/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# DFX temporary files
+.dfx/
+
+# Motoko temporary files
+.vessel/
+
+# Test files
+coverage/
+.nyc_output/
+
+# Include .env files for local development setup
+!.env
+!src/frontend/.env

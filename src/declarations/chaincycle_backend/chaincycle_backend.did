@@ -1,0 +1,91 @@
+type UserId = principal;
+type Time = int;
+type Result_5 = 
+ variant {
+   err: text;
+   ok: nat;
+ };
+type Result_4 = 
+ variant {
+   err: text;
+   ok: vec Proposal;
+ };
+type Result_3 = 
+ variant {
+   err: text;
+   ok: MaterialListing;
+ };
+type Result_2 = 
+ variant {
+   err: text;
+   ok: vec Bid;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: vec MaterialListing;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: Proposal;
+ };
+type Proposal = 
+ record {
+   creator: UserId;
+   description: text;
+   id: nat;
+   noVotes: nat;
+   status: variant {
+             active;
+             passed;
+             rejected;
+           };
+   title: text;
+   voteEndTime: int;
+   yesVotes: nat;
+ };
+type MaterialListing = 
+ record {
+   bidEndTime: Time;
+   createdAt: Time;
+   highestBid: opt Bid;
+   id: nat;
+   ipfsHash: opt text;
+   location: text;
+   materialType: text;
+   owner: UserId;
+   price: nat;
+   quantity: nat;
+   status: variant {
+             active;
+             cancelled;
+             sold;
+           };
+ };
+type Bid = 
+ record {
+   amount: nat;
+   bidder: UserId;
+   id: nat;
+   listingId: nat;
+   status: variant {
+             accepted;
+             active;
+             rejected;
+           };
+   timestamp: Time;
+ };
+service : {
+  castVote: (nat, bool) -> (Result);
+  createBid: (nat, nat) -> (Result_5);
+  createListing: (text, nat, text, nat, opt text, nat) -> (Result_5);
+  createProposal: (text, text) -> (Result);
+  finalizeBid: (nat) -> (Result_3);
+  getAllListings: () -> (Result_1);
+  getAllProposals: () -> (Result_4);
+  getListing: (nat) -> (Result_3);
+  getMyBids: () -> (Result_2);
+  getMyListings: () -> (Result_1);
+  getProposal: (nat) -> (Result);
+}
